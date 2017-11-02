@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+
+        .jumbotron {
+            background-image: url(images/animate01.jpg);
+        }
+
+        .body-content {
+            padding-top: 55px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .chat {
+            float: right;
+            color: #468847;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            font-size: 18px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 500;
+            line-height: 1.1;            
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>*@
+                <a href="@Url.RouteUrl("home")" class="navbar-brand"><img src="~/images/biglogo.jpg" width="400" /></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav" style="padding-top:62px;">
+                        <li><a href="@Url.RouteUrl("rfq.request")">Submit a RFQ</a></li>
+                        <li><a href="">Submit a PO</a></li>
+                    </ul>
+
+
+                    <ul class="nav navbar-right" style="padding-top:62px;">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                                aria-expanded="false"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name <span class="caret"></span></a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="">My Account</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.RouteUrl("logout")">Log Out</a></li>                                
+                            </ul>
+                        </li>
+                    </ul>
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()        
+        <footer>            
+            <div class="navbar navbar-default navbar-fixed-bottom" style="padding-top:10px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <small class="text-muted"><i>Call For More Info:</i></small><br />
+                            <small class="text-info">Anaheim: 800-331-7772</small><br />
+                            <small class="text-info">Canton: 888-479-7230</small><br />
+                            <small class="text-info">Romania: 0040 262 202330</small>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-center" style="padding-top:25px;">&copy; @DateTime.Now.Year - Universal Alloy Corporation</p>
+                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="col-md-4" style="padding-top:15px;">
+                                <div class="chat">
+                                    <a href=""><span class="glyphicon glyphicon-comment"></span> Chat Live</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
